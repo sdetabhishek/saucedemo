@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="tests" thread-count="2">
+    <listeners>
+        <listener class-name="automate.listerner.Listeners"></listener>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="C:/Users/abhishek.dubey/IdeaProjects/automateit">
+        <classes>
+            <class name="automate.tests.LoginPageTest">
+                <methods>
+                    <include name="loginApplicationTest"/>
+                    <include name="loginApplicationTestInvalidDetails"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
