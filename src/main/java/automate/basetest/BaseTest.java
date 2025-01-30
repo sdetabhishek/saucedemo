@@ -7,16 +7,11 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.beans.DesignMode;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Properties;
 
 public class BaseTest {
@@ -30,7 +25,7 @@ public class BaseTest {
         prop = new Properties();
 
         try {
-            FileInputStream fis = new FileInputStream("C:\\Users\\abhishek.dubey\\IdeaProjects\\automateit\\src\\main\\java\\automate\\configuration\\config");
+            FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\automate\\configuration\\config");
             prop.load(fis);
 
         } catch (FileNotFoundException e) {
@@ -47,29 +42,13 @@ public class BaseTest {
 
         if ((browserName.equalsIgnoreCase("chrome"))) {
 
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\abhishek.dubey\\IdeaProjects\\automateit\\drivers\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
 
 
             if (prop.getProperty("mode").equals("--incognito")) {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments(prop.getProperty("mode"));
                 driver = new ChromeDriver(options);
-
-
-                //code to connect with remote server using docker and aws
-
-           /* driver = new ChromeDriver();
-            DesiredCapabilities cap = new DesiredCapabilities();
-            cap.setCapability("browserName", "chrome");
-            try {
-                driver = new RemoteWebDriver(new URL("http://16.171.38.179:4444/wd/hub"), cap);
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println(" chrome launched in incognito mode.. ");
-            driver.get(prop.getProperty("url"));
-
-            driver.manage().window().maximize();*/
 
 
             } else if (prop.getProperty("mode").equals("--default")) {
@@ -80,7 +59,6 @@ public class BaseTest {
 
 
         } else {
-
 
             System.out.println(" firefox launched.. ");
 
